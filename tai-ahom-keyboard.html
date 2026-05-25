@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="as">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tai Ahom Keyboard · টাই আহোম কীব'ৰ্ড</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Noto+Sans+Ahom&display=swap" rel="stylesheet"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0a0500;min-height:100vh;font-family:'Cinzel',serif;color:#d4a84b}
+  .root{min-height:100vh;background:radial-gradient(ellipse at 20% 20%,#1e0d00,#0a0500 50%,#000);padding:20px 12px 40px;position:relative;overflow-x:hidden}
+  .root::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(212,168,75,.04) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(212,168,75,.04) 40px);pointer-events:none}
+  .corner{position:fixed;width:70px;height:70px;opacity:.2;pointer-events:none}
+  .c-tl{top:10px;left:10px;border-top:2px solid #d4a84b;border-left:2px solid #d4a84b}
+  .c-tr{top:10px;right:10px;border-top:2px solid #d4a84b;border-right:2px solid #d4a84b}
+  .c-bl{bottom:10px;left:10px;border-bottom:2px solid #d4a84b;border-left:2px solid #d4a84b}
+  .c-br{bottom:10px;right:10px;border-bottom:2px solid #d4a84b;border-right:2px solid #d4a84b}
+  .header{text-align:center;margin-bottom:18px}
+  .crown{font-size:26px;margin-bottom:4px;filter:drop-shadow(0 0 12px rgba(212,168,75,.8))}
+  .title-main{font-family:'Cinzel Decorative',serif;font-size:clamp(13px,4vw,20px);font-weight:900;color:#f0c040;letter-spacing:.1em;text-shadow:0 0 20px rgba(240,192,64,.5)}
+  .title-sub{font-size:clamp(8px,2vw,11px);color:#a07830;letter-spacing:.2em;margin-top:4px;text-transform:uppercase}
+  .divider{display:flex;align-items:center;gap:8px;margin:12px 0;opacity:.5}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,#d4a84b,transparent)}
+  .divider span{color:#d4a84b;font-size:10px}
+  .output-area{background:linear-gradient(135deg,#1a0f02,#120900);border:1px solid rgba(212,168,75,.4);border-radius:8px;padding:14px;margin-bottom:14px;position:relative;box-shadow:inset 0 2px 12px rgba(0,0,0,.6),0 0 20px rgba(212,168,75,.1)}
+  .output-label{font-size:9px;color:#806030;letter-spacing:.25em;text-transform:uppercase;margin-bottom:8px}
+  .output-text{font-family:'Noto Sans Ahom','Segoe UI',sans-serif;font-size:clamp(24px,7vw,38px);color:#f5e6c8;min-height:60px;letter-spacing:.05em;line-height:1.6;word-break:break-all;text-shadow:0 0 8px rgba(245,230,200,.3)}
+  .placeholder{color:#4a3010;font-size:13px;font-family:'Cinzel',serif;font-style:italic;line-height:60px}
+  .actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .btn{padding:6px 14px;border-radius:4px;border:1px solid;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.1em;cursor:pointer;transition:all .2s;text-transform:uppercase;background:transparent}
+  .btn-copy{border-color:rgba(212,168,75,.5);color:#d4a84b}
+  .btn-copy:hover{background:rgba(212,168,75,.2)}
+  .btn-space{border-color:rgba(100,150,212,.4);color:#80a0d0}
+  .btn-space:hover{background:rgba(100,150,212,.15)}
+  .btn-back{border-color:rgba(180,60,60,.4);color:#c07070}
+  .btn-back:hover{background:rgba(180,60,60,.2)}
+  .btn-clear{border-color:rgba(120,40,40,.4);color:#a05050}
+  .btn-clear:hover{background:rgba(180,60,60,.12)}
+  .toast{position:absolute;top:10px;right:14px;background:rgba(212,168,75,.9);color:#1a0a00;font-size:10px;padding:3px 10px;border-radius:20px;font-family:'Cinzel',serif;animation:fadeIO 2s ease forwards}
+  @keyframes fadeIO{0%{opacity:0}20%{opacity:1}80%{opacity:1}100%{opacity:0}}
+  .sec-title{font-size:9px;letter-spacing:.3em;color:#806030;text-transform:uppercase;margin-bottom:8px;text-align:center}
+  .keys{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px}
+  .key{display:flex;flex-direction:column;align-items:center;justify-content:center;width:clamp(44px,12vw,56px);height:clamp(48px,13vw,60px);background:linear-gradient(145deg,#1f1000,#150900);border:1px solid rgba(212,168,75,.3);border-radius:6px;cursor:pointer;transition:all .15s ease;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+  .key:hover{background:linear-gradient(145deg,#2e1800,#1f1000);border-color:rgba(212,168,75,.7);transform:translateY(-2px);box-shadow:0 4px 16px rgba(212,168,75,.2)}
+  .key:active{transform:scale(.95);box-shadow:0 0 12px rgba(212,168,75,.3)}
+  .key-char{font-family:'Noto Sans Ahom','Segoe UI',sans-serif;font-size:clamp(18px,5vw,24px);color:#f0c040;line-height:1;text-shadow:0 0 8px rgba(240,192,64,.5)}
+  .key-name{font-size:7px;color:#806030;letter-spacing:.05em;margin-top:2px;text-transform:uppercase}
+  .key-v{background:linear-gradient(145deg,#001520,#000f18);border-color:rgba(100,180,255,.25)}
+  .key-v:hover{background:linear-gradient(145deg,#00243a,#001520);border-color:rgba(100,180,255,.6);box-shadow:0 4px 16px rgba(100,180,255,.15)}
+  .key-v .key-char{color:#80d0ff;text-shadow:0 0 8px rgba(128,208,255,.5)}
+  .key-v .key-name{color:#306080}
+  .key-d{background:linear-gradient(145deg,#0f0020,#080015);border-color:rgba(180,100,255,.25)}
+  .key-d:hover{background:linear-gradient(145deg,#1a0038,#0f0020);border-color:rgba(180,100,255,.6);box-shadow:0 4px 16px rgba(180,100,255,.15)}
+  .key-d .key-char{color:#c090ff;text-shadow:0 0 8px rgba(192,144,255,.5)}
+  .key-d .key-name{color:#604080}
+  .legend{text-align:center;font-size:9px;color:#4a3010;letter-spacing:.15em;margin-top:8px}
+  .footer{text-align:center;margin-top:20px;padding-top:12px;border-top:1px solid rgba(212,168,75,.1)}
+  .footer p{font-family:'Cinzel Decorative',serif;font-size:8px;color:#3a2008;letter-spacing:.2em}
+</style>
+</head>
+<body>
+<div class="root">
+  <div class="corner c-tl"></div>
+  <div class="corner c-tr"></div>
+  <div class="corner c-bl"></div>
+  <div class="corner c-br"></div>
+
+  <div class="header">
+    <div class="crown">𑜰𑜱𑜲</div>
+    <div class="title-main">TAI AHOM KEYBOARD</div>
+    <div class="title-sub">টাই আহোম কীব'ৰ্ড · Unicode U+11700</div>
+  </div>
+
+  <div class="divider"><span>◆</span></div>
+
+  <div class="output-area" id="outputArea">
+    <div class="output-label">◈ Type Here · ইয়াত লিখক</div>
+    <div class="output-text" id="output">
+      <span class="placeholder" id="placeholder">Click keys to type Tai Ahom script...</span>
+    </div>
+    <div class="actions">
+      <button class="btn btn-copy" onclick="copyText()">⎘ Copy</button>
+      <button class="btn btn-space" onclick="addChar(' ')">⎵ Space</button>
+      <button class="btn btn-back" onclick="backspace()">⌫ Del</button>
+      <button class="btn btn-clear" onclick="clearText()">✕ Clear</button>
+    </div>
+  </div>
+
+  <div class="sec-title">◈ ব্যঞ্জনবৰ্ণ · Consonants</div>
+  <div class="keys" id="consonants"></div>
+
+  <div class="divider"><span>◆</span></div>
+
+  <div class="sec-title">◈ স্বৰবৰ্ণ চিহ্ন · Vowel Signs</div>
+  <div class="keys" id="vowels"></div>
+
+  <div class="divider"><span>◆</span></div>
+
+  <div class="sec-title">◈ আহোম সংখ্যা · Ahom Numerals</div>
+  <div class="keys" id="digits"></div>
+
+  <div class="legend">🟡 Consonants &nbsp;·&nbsp; 🔵 Vowel Signs &nbsp;·&nbsp; 🟣 Numerals</div>
+
+  <div class="footer">
+    <p>𑜀𑜙𑜒𑜗 · TAI AHOM HERITAGE · টেঙাই মহন বংশ · 2026</p>
+  </div>
+</div>
+
+<script>
+const CONSONANTS=[
+  ['𑜀','KA'],['𑜁','KHA'],['𑜂','NGA'],['𑜃','NA*'],['𑜄','CA'],
+  ['𑜅','CHA'],['𑜆','JA'],['𑜇','JHA'],['𑜈','NYA'],['𑜉','TTA'],
+  ['𑜊','TTHA'],['𑜋','DDA'],['𑜌','DDHA'],['𑜍','NNA'],['𑜎','TA'],
+  ['𑜏','THA'],['𑜐','DA'],['𑜑','DHA'],['𑜒','NA'],['𑜓','PA'],
+  ['𑜔','PHA'],['𑜕','BA'],['𑜖','BHA'],['𑜗','MA'],['𑜘','YA'],
+  ['𑜙','RA'],['𑜚','LA'],['𑜛','SA'],['𑜜','HA']
+];
+const VOWELS=[
+  ['𑜝','ALA'],['𑜞','AA'],['𑜟','I'],['𑜠','II'],['𑜡','U'],
+  ['𑜢','UU'],['𑜣','E'],['𑜤','AW'],['𑜥','AM'],['𑜦','KIL']
+];
+const DIGITS=[
+  ['𑜰','0'],['𑜱','1'],['𑜲','2'],['𑜳','3'],['𑜴','4'],
+  ['𑜵','5'],['𑜶','6'],['𑜷','7'],['𑜸','8'],['𑜹','9']
+];
+
+let typed='';
+
+function render(){
+  const el=document.getElementById('output');
+  const ph=document.getElementById('placeholder');
+  if(typed){
+    if(ph) ph.style.display='none';
+    el.childNodes.forEach(n=>{if(n!==ph)n.remove()});
+    const t=document.createTextNode(typed);
+    el.appendChild(t);
+  } else {
+    el.childNodes.forEach(n=>{if(n!==ph)n.remove()});
+    if(ph) ph.style.display='';
+  }
+}
+
+function addChar(c){typed+=c;render();}
+function backspace(){typed=[...typed].slice(0,-1).join('');render();}
+function clearText(){typed='';render();}
+function copyText(){
+  if(!typed)return;
+  navigator.clipboard.writeText(typed).then(()=>{
+    const t=document.createElement('div');
+    t.className='toast';t.textContent='✓ COPIED!';
+    document.getElementById('outputArea').appendChild(t);
+    setTimeout(()=>t.remove(),2000);
+  });
+}
+
+function makeKeys(data,containerId,extraClass=''){
+  const c=document.getElementById(containerId);
+  data.forEach(([ch,name])=>{
+    const b=document.createElement('button');
+    b.className='key'+(extraClass?' '+extraClass:'');
+    b.innerHTML=`<span class="key-char">${ch}</span><span class="key-name">${name}</span>`;
+    b.onclick=()=>addChar(ch);
+    c.appendChild(b);
+  });
+}
+
+makeKeys(CONSONANTS,'consonants');
+makeKeys(VOWELS,'vowels','key-v');
+makeKeys(DIGITS,'digits','key-d');
+</script>
+</body>
+</html>
